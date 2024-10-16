@@ -799,6 +799,46 @@ class Client {
       }
     });
   }
+
+  /**
+   * Read a policy
+   *
+   * @link https://developer.hashicorp.com/vault/api-docs/system/policy#read-policy
+   */
+  get policyRead() {
+    return generateCommand({
+      method: 'GET',
+      path: '/sys/policy/{{name}}',
+      client: this,
+      schema: {
+        path: z.object({
+          name: z.string()
+        }),
+        response: z.object({
+          name: z.string(),
+          rules: z.string()
+        })
+      }
+    });
+  }
+
+  /**
+   * Delete a policy
+   *
+   * @link https://developer.hashicorp.com/vault/api-docs/system/delete-policy
+   */
+  get policyDelete() {
+    return generateCommand({
+      method: 'DELETE',
+      path: '/sys/policy/{{name}}',
+      client: this,
+      schema: {
+        path: z.object({
+          name: z.string()
+        })
+      }
+    });
+  }
 }
 
 export { Client };
