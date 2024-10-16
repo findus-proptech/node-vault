@@ -21,18 +21,18 @@ export class TokenMethod extends ApiSector {
       path: '/auth/token/accessors',
       client: this.client,
       schema: {
-        response: ZodAnyRecord
-        // response: z.object({
-        //   auth: z.any(),
-        //   warnings: z.array(z.string()),
-        //   wrap_info: z.any(),
-        //   data: z.object({
-        //     keys: z.array(z.string())
-        //   }),
-        //   lease_duration: z.number(),
-        //   renewable: z.boolean(),
-        //   lease_id: z.string()
-        // })
+        // response: ZodAnyRecord
+        response: z.object({
+          auth: z.any(),
+          warnings: z.any(),
+          wrap_info: z.any(),
+          data: z.object({
+            keys: z.array(z.string())
+          }),
+          lease_duration: z.number(),
+          renewable: z.boolean(),
+          lease_id: z.string()
+        })
       }
     });
   }
