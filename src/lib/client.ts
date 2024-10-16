@@ -759,9 +759,9 @@ class Client {
   }
 
   /**
-   * Read health information
+   * Get the list of policies
    *
-   * @link https://developer.hashicorp.com/vault/api-docs/system/health#read-health-information
+   * @link https://developer.hashicorp.com/vault/api-docs/system/policy#list-policies
    */
   get policyList() {
     return generateCommand({
@@ -769,6 +769,30 @@ class Client {
       path: '/sys/policy',
       client: this,
       schema: {
+        response: z.object({
+          policies: z.array(z.string())
+        })
+      }
+    });
+  }
+
+  /**
+   * Create/Update a policy
+   *
+   * @link https://developer.hashicorp.com/vault/api-docs/system/policy#create-update-policy
+   */
+  get policyCreateUpdate() {
+    return generateCommand({
+      method: 'POST',
+      path: '/sys/policy/{{name}}',
+      client: this,
+      schema: {
+        path: z.object({
+          name: z.string()
+        }),
+        body: z.object({
+          policy: z.string()
+        }),
         response: z.object({
           policies: z.array(z.string())
         })
