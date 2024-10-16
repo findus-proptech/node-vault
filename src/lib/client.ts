@@ -766,7 +766,7 @@ class Client {
   get policyList() {
     return generateCommand({
       method: 'GET',
-      path: '/sys/policy',
+      path: '/sys/policies/acl',
       client: this,
       schema: {
         response: z.record(z.any())
