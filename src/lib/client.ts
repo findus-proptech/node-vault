@@ -769,9 +769,7 @@ class Client {
       path: '/sys/policy',
       client: this,
       schema: {
-        response: z.object({
-          policies: z.array(z.string())
-        })
+        response: z.record(z.any())
       }
     });
   }
