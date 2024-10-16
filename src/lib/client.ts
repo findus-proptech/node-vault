@@ -12,6 +12,7 @@ import {
 } from '@/schema';
 import { ClientOptions, Fetcher } from '@/typings';
 import { generateCommand } from '@/utils/generate-command';
+import { Token } from '@/engine/token';
 
 class Client {
   endpoint: string;
@@ -62,6 +63,13 @@ class Client {
    */
   get kv2() {
     return new Kv2(this);
+  }
+
+  /**
+    * Token auth method
+  */
+  get tokenMethod() {
+    return new Token(this);
   }
 
   /**
