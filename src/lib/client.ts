@@ -766,10 +766,21 @@ class Client {
   get policyList() {
     return generateCommand({
       method: 'GET',
-      path: '/sys/policies/acl',
+      path: '/sys/health',
       client: this,
       schema: {
-        response: z.record(z.any())
+        response: z.object({
+          initialized: z.boolean(),
+          sealed: z.boolean(),
+          standby: z.boolean(),
+          performance_standby: z.boolean(),
+          replication_performance_mode: z.string(),
+          replication_dr_mode: z.string(),
+          server_time_utc: z.number(),
+          version: z.string(),
+          cluster_name: z.string(),
+          cluster_id: z.string()
+        })
       }
     });
   }
