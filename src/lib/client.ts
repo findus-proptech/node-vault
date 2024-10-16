@@ -757,6 +757,24 @@ class Client {
       }
     });
   }
+
+  /**
+   * Read health information
+   *
+   * @link https://developer.hashicorp.com/vault/api-docs/system/health#read-health-information
+   */
+  get policyList() {
+    return generateCommand({
+      method: 'GET',
+      path: '/sys/health',
+      client: this,
+      schema: {
+        response: z.object({
+          policies: z.array(z.string())
+        })
+      }
+    });
+  }
 }
 
 export { Client };

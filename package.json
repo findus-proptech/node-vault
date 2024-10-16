@@ -1,5 +1,5 @@
 {
-  "name": "@litehex/node-vault",
+  "name": "@findusproptech/node-vault",
   "version": "1.0.0",
   "description": "A client for the HashiCorp's Vault API written for Node.js",
   "main": "dist/index.cjs",
@@ -28,8 +28,7 @@
     "lint:fix": "eslint --fix .",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
-    "ci:publish": "changeset publish",
-    "prepublishOnly": "pnpm test && pnpm lint && pnpm format:check && pnpm build"
+    "ci:publish": "changeset publish"
   },
   "packageManager": "pnpm@8.15.7",
   "dependencies": {
@@ -65,7 +64,7 @@
   "private": false,
   "publishConfig": {
     "access": "public",
-    "provenance": true
+    "provenance": false
   },
   "repository": {
     "type": "git",
