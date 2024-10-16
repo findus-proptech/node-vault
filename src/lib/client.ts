@@ -766,7 +766,7 @@ class Client {
   get policyList() {
     return generateCommand({
       method: 'GET',
-      path: '/sys/health',
+      path: '/sys/policy',
       client: this,
       schema: {
         response: z.object({
