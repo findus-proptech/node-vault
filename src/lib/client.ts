@@ -766,20 +766,11 @@ class Client {
   get policyList() {
     return generateCommand({
       method: 'GET',
-      path: '/sys/health',
+      path: '/sys/policy',
       client: this,
       schema: {
         response: z.object({
-          initialized: z.boolean(),
-          sealed: z.boolean(),
-          standby: z.boolean(),
-          performance_standby: z.boolean(),
-          replication_performance_mode: z.string(),
-          replication_dr_mode: z.string(),
-          server_time_utc: z.number(),
-          version: z.string(),
-          cluster_name: z.string(),
-          cluster_id: z.string()
+          policies: z.array(z.string())
         })
       }
     });
