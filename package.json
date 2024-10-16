@@ -1,6 +1,6 @@
 {
   "name": "@findusproptech/node-vault",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A client for the HashiCorp's Vault API written for Node.js",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
