@@ -8,7 +8,7 @@ import { generateCommand } from '@/utils/generate-command';
  *
  * @link https://developer.hashicorp.com/vault/api-docs/secret/kubernetes
  */
-export class Token extends ApiSector {
+export class TokenMethod extends ApiSector {
   /**
    * List accessors
    *

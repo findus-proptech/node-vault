@@ -12,7 +12,7 @@ import {
 } from '@/schema';
 import { ClientOptions, Fetcher } from '@/typings';
 import { generateCommand } from '@/utils/generate-command';
-import { Token } from '@/engine/token';
+import { TokenMethod } from '@/engine/token';
 
 class Client {
   endpoint: string;
@@ -69,7 +69,7 @@ class Client {
     * Token auth method
   */
   get tokenMethod() {
-    return new Token(this);
+    return new TokenMethod(this);
   }
 
   /**
