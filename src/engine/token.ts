@@ -131,19 +131,19 @@ export class TokenMethod extends ApiSector {
             creation_ttl: z.number(),
             display_name: z.string(),
             entity_id: z.string(),
-            expire_time: z.string(),
+            expire_time: z.string().optional(),
             explicit_max_ttl: z.number(),
             id: z.string(),
-            identity_policies: z.array(z.string()),
-            issue_time: z.string(),
+            identity_policies: z.array(z.string()).optional(),
+            issue_time: z.string().optional(),
             meta: z.object({
               username: z.string()
-            }),
+            }).optional(),
             num_uses: z.number(),
             orphan: z.boolean(),
             path: z.string(),
             policies: z.array(z.string()),
-            renewable: z.boolean(),
+            renewable: z.boolean().optional(),
             ttl: z.number()
           })
         })
