@@ -93,6 +93,89 @@ export class TokenMethod extends ApiSector {
   }
 
   /**
+   * Renew a token
+   *
+   * @link https://developer.hashicorp.com/vault/api-docs/auth/token#renew-a-token
+   */
+  get renew() {
+    return generateCommand({
+      method: 'POST',
+      path: '/auth/token/renew',
+      client: this.client,
+      schema: {
+        body: z.object({
+          token: z.string(),
+          increment: z.string().optional()
+        }),
+        response: z.object({
+          auth: z.object({
+            client_token: z.string(),
+            policies: z.array(z.string()).optional(),
+            metadata: z.record(z.string(), z.string()).nullable(),
+            lease_duration: z.number(),
+            renewable: z.boolean()
+          })
+        })
+      }
+    });
+  }
+
+  /**
+   * Renew a token (Self)
+   *
+   * @link https://developer.hashicorp.com/vault/api-docs/auth/token#renew-a-token-self
+   */
+  get renewSelf() {
+    return generateCommand({
+      method: 'POST',
+      path: '/auth/token/renew-self',
+      client: this.client,
+      schema: {
+        body: z.object({
+          increment: z.string().optional()
+        }),
+        response: z.object({
+          auth: z.object({
+            client_token: z.string(),
+            policies: z.array(z.string()).optional(),
+            metadata: z.record(z.string(), z.string()).nullable(),
+            lease_duration: z.number(),
+            renewable: z.boolean()
+          })
+        })
+      }
+    });
+  }
+
+  /**
+   * Renew a token (Accessor)
+   *
+   * @link https://developer.hashicorp.com/vault/api-docs/auth/token#renew-a-token-accessor
+   */
+  get renewAccessor() {
+    return generateCommand({
+      method: 'POST',
+      path: '/auth/token/renew-accessor',
+      client: this.client,
+      schema: {
+        body: z.object({
+          accessor: z.string(),
+          increment: z.string().optional()
+        }),
+        response: z.object({
+          auth: z.object({
+            client_token: z.string(),
+            policies: z.array(z.string()).optional(),
+            metadata: z.record(z.string(), z.string()).nullable(),
+            lease_duration: z.number(),
+            renewable: z.boolean()
+          })
+        })
+      }
+    });
+  }
+
+  /**
    * Revoke token and orphan children
    *
    * @link https://developer.hashicorp.com/vault/api-docs/auth/token#revoke-token-and-orphan-children
