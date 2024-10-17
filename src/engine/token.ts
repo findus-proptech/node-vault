@@ -46,6 +46,23 @@ export class TokenMethod extends ApiSector {
       path: '/auth/token/create',
       client: this.client,
       schema: {
+        body: z.object({
+          id: z.string().optional(),
+          role_name: z.string().optional(),
+          policies: z.array(z.string()).optional(),
+          meta: z.record(z.string(), z.string()).optional(),
+          no_parent: z.boolean().optional(),
+          no_default_policy: z.boolean().optional(),
+          renewable: z.boolean().default(true),
+          lease: z.string().optional(), // Deprecated
+          ttl: z.string().optional(),
+          type: z.string().optional(),
+          explicit_max_ttl: z.string().optional(),
+          display_name: z.string().default('token'),
+          num_uses: z.number().int().optional(),
+          period: z.string().optional(),
+          entity_alias: z.string().optional()
+        }),
         response: z.object({
           request_id: z.string(),
           lease_id: z.string().nullable(),
@@ -70,23 +87,24 @@ export class TokenMethod extends ApiSector {
             })
             .nullable()
             .default(null)
-        }),
+        })
+      }
+    });
+  }
+
+  /**
+   * Revoke token and orphan children
+   *
+   * @link https://developer.hashicorp.com/vault/api-docs/auth/token#revoke-token-and-orphan-children
+   */
+  get revokeToken() {
+    return generateCommand({
+      method: 'POST',
+      path: '/auth/token/revoke-orphan',
+      client: this.client,
+      schema: {
         body: z.object({
-          id: z.string().optional(),
-          role_name: z.string().optional(),
-          policies: z.array(z.string()).optional(),
-          meta: z.record(z.string(), z.string()).optional(),
-          no_parent: z.boolean().optional(),
-          no_default_policy: z.boolean().optional(),
-          renewable: z.boolean().default(true),
-          lease: z.string().optional(), // Deprecated
-          ttl: z.string().optional(),
-          type: z.string().optional(),
-          explicit_max_ttl: z.string().optional(),
-          display_name: z.string().default('token'),
-          num_uses: z.number().int().optional(),
-          period: z.string().optional(),
-          entity_alias: z.string().optional()
+          token: z.string()
         })
       }
     });
