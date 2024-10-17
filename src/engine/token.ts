@@ -111,6 +111,38 @@ export class TokenMethod extends ApiSector {
   }
 
   /**
+   * Revoke a token (Self)
+   *
+   * @link https://developer.hashicorp.com/vault/api-docs/auth/token#revoke-a-token-self
+   */
+  get revokeSelf() {
+    return generateCommand({
+      method: 'POST',
+      path: '/auth/token/revoke-self',
+      client: this.client,
+      schema: {}
+    });
+  }
+
+  /**
+   * Revoke a token accessor
+   *
+   * @link https://developer.hashicorp.com/vault/api-docs/auth/token#revoke-a-token-accessor
+   */
+  get revokeAccessor() {
+    return generateCommand({
+      method: 'POST',
+      path: '/auth/token/revoke-accessor',
+      client: this.client,
+      schema: {
+        body: z.object({
+          accessor: z.string()
+        })
+      }
+    });
+  }
+
+  /**
    * Lookup a token
    *
    * @link https://developer.hashicorp.com/vault/api-docs/auth/token#lookup-a-token
@@ -136,9 +168,11 @@ export class TokenMethod extends ApiSector {
             id: z.string(),
             identity_policies: z.array(z.string()).optional(),
             issue_time: z.string().optional(),
-            meta: z.object({
-              username: z.string()
-            }).nullable(),
+            meta: z
+              .object({
+                username: z.string()
+              })
+              .nullable(),
             num_uses: z.number(),
             orphan: z.boolean(),
             path: z.string(),
@@ -174,9 +208,11 @@ export class TokenMethod extends ApiSector {
             id: z.string(),
             identity_policies: z.array(z.string()).optional(),
             issue_time: z.string().optional(),
-            meta: z.object({
-              username: z.string()
-            }).nullable(),
+            meta: z
+              .object({
+                username: z.string()
+              })
+              .nullable(),
             num_uses: z.number(),
             orphan: z.boolean(),
             path: z.string(),
@@ -215,9 +251,11 @@ export class TokenMethod extends ApiSector {
             id: z.string(),
             identity_policies: z.array(z.string()).optional(),
             issue_time: z.string().optional(),
-            meta: z.object({
-              username: z.string()
-            }).nullable(),
+            meta: z
+              .object({
+                username: z.string()
+              })
+              .nullable(),
             num_uses: z.number(),
             orphan: z.boolean(),
             path: z.string(),
