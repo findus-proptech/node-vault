@@ -68,7 +68,7 @@ class Client {
   /**
    * Token auth method
    */
-  get tokenMethod() {
+  get tokens() {
     return new Tokens(this);
   }
 
