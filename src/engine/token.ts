@@ -8,7 +8,7 @@ import { generateCommand } from '@/utils/generate-command';
  *
  * @link https://developer.hashicorp.com/vault/api-docs/auth/token
  */
-export class TokenMethod extends ApiSector {
+export class Tokens extends ApiSector {
   /**
    * List accessors
    *

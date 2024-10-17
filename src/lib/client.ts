@@ -4,6 +4,7 @@ import { Aws } from '@/engine/aws';
 import { Kubernetes } from '@/engine/kubernetes';
 import { Kv } from '@/engine/kv';
 import { Kv2 } from '@/engine/kv2';
+import { Tokens } from '@/engine/token';
 import {
   ClientOptionsSchema,
   EngineInfoSchema,
@@ -12,7 +13,6 @@ import {
 } from '@/schema';
 import { ClientOptions, Fetcher } from '@/typings';
 import { generateCommand } from '@/utils/generate-command';
-import { TokenMethod } from '@/engine/token';
 
 class Client {
   endpoint: string;
@@ -66,10 +66,10 @@ class Client {
   }
 
   /**
-    * Token auth method
-  */
+   * Token auth method
+   */
   get tokenMethod() {
-    return new TokenMethod(this);
+    return new Tokens(this);
   }
 
   /**
