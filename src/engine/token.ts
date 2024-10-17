@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 import { ApiSector } from '@/lib/sector';
 import { generateCommand } from '@/utils/generate-command';
-import { ZodAnyRecord } from '@/schema';
+
 
 /**
  * Vault token auth method
@@ -21,7 +21,6 @@ export class TokenMethod extends ApiSector {
       path: '/auth/token/accessors',
       client: this.client,
       schema: {
-        // response: ZodAnyRecord
         response: z.object({
           auth: z.any(),
           warnings: z.any(),
