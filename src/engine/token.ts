@@ -40,7 +40,7 @@ export class TokenMethod extends ApiSector {
    *
    * @link https://developer.hashicorp.com/vault/api-docs/auth/token#create-token
    */
-  get createToken() {
+  get create() {
     return generateCommand({
       method: 'POST',
       path: '/auth/token/create',
@@ -97,7 +97,7 @@ export class TokenMethod extends ApiSector {
    *
    * @link https://developer.hashicorp.com/vault/api-docs/auth/token#revoke-token-and-orphan-children
    */
-  get revokeToken() {
+  get revoke() {
     return generateCommand({
       method: 'POST',
       path: '/auth/token/revoke-orphan',
@@ -105,6 +105,47 @@ export class TokenMethod extends ApiSector {
       schema: {
         body: z.object({
           token: z.string()
+        })
+      }
+    });
+  }
+
+  /**
+   * Lookup a token
+   *
+   * @link https://developer.hashicorp.com/vault/api-docs/auth/token#lookup-a-token
+   */
+  get lookup() {
+    return generateCommand({
+      method: 'POST',
+      path: '/auth/token/lookup',
+      client: this.client,
+      schema: {
+        body: z.object({
+          token: z.string()
+        }),
+        response: z.object({
+          data: z.object({
+            accessor: z.string(),
+            creation_time: z.number(),
+            creation_ttl: z.number(),
+            display_name: z.string(),
+            entity_id: z.string(),
+            expire_time: z.string(),
+            explicit_max_ttl: z.number(),
+            id: z.string(),
+            identity_policies: z.array(z.string()),
+            issue_time: z.string(),
+            meta: z.object({
+              username: z.string()
+            }),
+            num_uses: z.number(),
+            orphan: z.boolean(),
+            path: z.string(),
+            policies: z.array(z.string()),
+            renewable: z.boolean(),
+            ttl: z.number()
+          })
         })
       }
     });
