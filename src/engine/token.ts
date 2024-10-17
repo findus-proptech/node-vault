@@ -425,7 +425,7 @@ export class Tokens extends ApiSector {
         response: z.object({
           data: z.object({
             keys: z.array(z.string())
-          })
+          }).optional()
         })
       }
     });
